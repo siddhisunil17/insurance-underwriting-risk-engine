@@ -21,7 +21,34 @@ This project predicts high-claim underwriting risk for health insurance policyho
 
 ## Architecture
 
-Streamlit Frontend → FastAPI Backend → Random Forest Model → Underwriting Decision
+```mermaid
+flowchart TD
+
+    A[User] --> B[Streamlit Frontend]
+
+    B --> C[FastAPI Backend]
+
+    C --> D[Preprocessing Layer]
+
+    D --> E[Saved Random Forest Model]
+
+    E --> F[Risk Probability]
+
+    F --> G[Risk Scoring Logic]
+
+    G --> H[Underwriting Decision]
+
+    H --> B
+
+    I[Training Notebooks] --> J[EDA + Feature Engineering]
+    J --> K[Model Training]
+    K --> L[SHAP Explainability]
+    K --> E
+```
+
+The Streamlit frontend collects policyholder inputs and sends them to the FastAPI backend.
+
+FastAPI applies preprocessing, loads the trained Random Forest model, generates risk probability, computes risk score and risk tier, and returns the underwriting decision to the frontend.
 
 ## How to Run
 
